@@ -1,0 +1,5 @@
+Nákup,- banka nakupuje, klient prodává,Prodej,- banka prodává, klient nakupuje,Devizy,- cizí měna převáděná mezi účty,Valuty,- cizí měna v hotovosti - bankovky a mince
+Nákup,- banka nakupuje, klient prodává
+Prodej,- banka prodává, klient nakupuje
+Devizy,- cizí měna převáděná mezi účty
+Valuty,- cizí měna v hotovosti - bankovky a mince

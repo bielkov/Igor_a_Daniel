@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package igor_a_daniel.bank.CNB;
+package igor_a_daniel.download;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,11 +23,12 @@ import java.util.Scanner;
  *
  * @author Игорь
  */
-public class downloadFile {
+public class CNB {
 
     private static LocalDate date = LocalDate.now();
 
-    public static void downloadFileCurrenciesCNB() {
+    private static boolean downloadFileCurrenciesCNB() {
+        boolean download =  false;
         try {
 
             DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd.MM.uuuu");
@@ -35,21 +36,24 @@ public class downloadFile {
             String text = date.format(formatters);
             URL website = new URL("http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt?date=" + text);
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream("src/igor_a_daniel/bank/CNB/kurzy.txt");
+            FileOutputStream fos = new FileOutputStream("CNB/kurzy.txt");
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            download = true;
         } catch (IOException e) {
             System.out.println(e);
         }
+        return download;
     }
 
-    private static void convertToCsv() throws IOException {
+    public void downloadCurrencyFromCNB() throws IOException {
+        if(downloadFileCurrenciesCNB()){
         FileWriter writer;
         File file = new File("kurzy.txt");
         Scanner scan = new Scanner(file);
-        File file2 = new File("src/igor_a_daniel/bank/CNB/kurz " + date.toString() + ".csv");
+        File file2 = new File("CNB/kurz " + date.toString() + ".csv");
             writer = new FileWriter(file2);
-            Writer fstream = null;
-            BufferedWriter out = null;
+            Writer fstream;
+            BufferedWriter out;
             try {
                 fstream = new OutputStreamWriter(new FileOutputStream(file2), "cp1250");
                 out = new BufferedWriter(fstream);
@@ -65,6 +69,9 @@ public class downloadFile {
                 System.out.println(e);
             }
 
+        }else{
+            System.out.println("FAIL!!!!");
         }
+    }
     
 }
