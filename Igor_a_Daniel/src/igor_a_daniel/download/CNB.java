@@ -27,8 +27,8 @@ public class CNB {
 
     private static LocalDate date = LocalDate.now();
 
-    private static boolean downloadFileCurrenciesCNB() {
-        boolean download =  false;
+    private static void downloadFileCurrenciesCNB() {
+       
         try {
 
             DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd.MM.uuuu");
@@ -38,15 +38,15 @@ public class CNB {
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
             FileOutputStream fos = new FileOutputStream("CNB/kurzy.txt");
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-            download = true;
+           
         } catch (IOException e) {
             System.out.println(e);
         }
-        return download;
+        
     }
 
     public void downloadCurrencyFromCNB() throws IOException {
-        if(downloadFileCurrenciesCNB()){
+        downloadFileCurrenciesCNB();
         FileWriter writer;
         File file = new File("kurzy.txt");
         Scanner scan = new Scanner(file);
@@ -69,9 +69,7 @@ public class CNB {
                 System.out.println(e);
             }
 
-        }else{
-            System.out.println("FAIL!!!!");
-        }
+        
     }
-    
+   
 }
