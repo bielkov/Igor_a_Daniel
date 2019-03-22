@@ -48,4 +48,9 @@ public class Bank implements ICurrency {
         return this.isChange(value);
     }
 
+    @Override
+    public void country(String state) {
+        this.country(state);
+    }
+
 }

@@ -11,6 +11,7 @@ package igor_a_daniel.bank;
  */
 public interface ICurrency {
     public void nameCurrency(String name);
+    public void country(String state);
     public void abbreviation(String abb);
     public double buy(double value);
     public double sale(double value);
